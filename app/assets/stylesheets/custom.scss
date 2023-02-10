@@ -1,0 +1,32 @@
+$gray-lightest: #f1f2f3 !default;
+$brand-primary: #3f87f5 !default;
+
+@font-face {
+  font-family: "anticon";
+  src: asset-url("anticon.eot");
+  src: asset-url("anticon.eot?#iefix") format("embedded-opentype"),
+    asset-url("anticon.woff") format("woff"),
+    asset-url("anticon.ttf") format("truetype"),
+    asset-url("anticon.svg#anticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.table-striped {
+  >tbody {
+    >tr {
+      &:nth-of-type(odd) {
+        background-color: lighten($gray-lightest, 0.5%);
+      }
+    }
+  }
+}
+
+a.btn.btn-primary {
+  padding-top: 0.7rem !important;
+  color: $brand-primary !important;
+
+  &:hover {
+    color: white !important;
+  }
+}
