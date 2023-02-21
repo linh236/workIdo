@@ -30,3 +30,33 @@ a.btn.btn-primary {
     color: white !important;
   }
 }
+
+.fixed-right {
+  .icon {
+    font-size: 30px;
+    left: -10px;
+    position: absolute;
+  }
+}
+
+@for $i from 20 through 300 {
+  .w-#{$i}px {
+    width: #{$i}px;
+  }
+}
+
+@for $i from 40 through 100 {
+  .vh-#{$i} {
+    height: #{$i}vh;
+  }
+  .wh-#{$i} {
+    width: #{$i}vh;
+  }
+}
+
+.break-task {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -1,0 +1,25 @@
+<%= link_to 'Back', :back %>
+<h1>Add a new task</h1>
+
+<%= form_with model: [@current_project, @label, @task] do |f| %>
+  <% invalid = @task.errors.include?(:name) %>
+  <div class="form-col align-item-center">
+    <div class="col-auto">
+      <%= f.text_field :name, class: "form-control #{'is-invalid' if invalid}", placeholder: "Enter name task" %>
+      <div class="invalid-feedback d-block">
+        <% @task.errors.full_messages_for(:name).each do |error_message| %>
+          <%= error_message %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-auto mt-2">
+      <%= f.rich_text_area :description, class: "form-control", placeholder: "Enter description task" %>
+    </div>
+    <div class="col-auto mt-2">
+      <%= select_tag "task[level]", options_for_select(Task.levels.map {|k, v| [k.capitalize, k]}), class: "form-control" %>
+    </div>
+    <div class="col-auto mt-2">
+      <%= f.submit "Save", class: "btn btn-primary btn-tone" %>
+    </div>
+  </div>
+<% end %>

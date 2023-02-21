@@ -2,32 +2,43 @@
   <div class="side-nav p-l-20 p-t-20">
     <div class="side-nav-inner">
       <ul class="side-nav-menu scrollable ps-container ps-theme-default">
-        <li class="nav-item dropdown">
-          <%= link_to root_path do %>
-            <span class="icon-holder">
-              <i class="anticon anticon-dashboard"></i>
-            </span>
-            <span class="title">Dashboard</span>
-            <% end %>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="dropdown-toggle" data-action="click->nav#toggle">
-            <span class="icon-holder">
-              <i class="anticon anticon-pie-chart"></i>
-            </span>
-            <span class="title">Domains</span>
-            <span class="arrow">
-              <i class="arrow-icon"></i>
-            </span>
-          </a> 
-          <ul class="dropdown-menu">
-            <li><%= link_to "domain.name", "" %></li>
-            <li><%= link_to "domain.name", "" %></li>
-            <li><%= link_to "domain.name", "" %></li>
-            <li><%= link_to "domain.name", "" %></li>
-            <li><%= link_to "domain.name", "" %></li>
-          </ul>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <%= link_to root_path do %>
+              <span class="icon-holder">
+                <i class="anticon anticon-dashboard"></i>
+              </span>
+              <span class="title">Dashboard</span>
+              <% end %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle" data-action="click->nav#toggle">
+              <span class="icon-holder">
+                <i class="anticon anticon-pie-chart"></i>
+              </span>
+              <span class="title">Projects</span>
+              <span class="arrow">
+                <i class="arrow-icon"></i>
+              </span>
+            </a> 
+            <ul class="dropdown-menu">
+              <% if @projects.empty? %>
+                <p class="text-center">Please add project.</p>
+              <% else %>
+                <% @projects.each do |project| %>
+                  <li class="<%= 'active' if project.selected %>"><%= link_to project.name, project_path(project) %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+          <li class="text-center">
+            <%= link_to "Add Project", new_project_path, class: "btn btn-primary btn-tone hover:text-white m-r-20 m-t-20" %>
+          </li>
+        <% else %>
+          <li class="text-center">
+            <%= link_to "Sign in", user_session_path, class: "btn btn-primary btn-tone hover:text-white m-r-20 m-t-20" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

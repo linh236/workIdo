@@ -1,0 +1,6 @@
+<%= turbo_stream.append "label-#{@task.label_id}" do %>
+  <%= render partial: "tasks/item_task", locals: {task: @task}%>
+<% end %>
+
+<%= turbo_stream.remove "label-#{@start_move_label}-task-#{@task.id}" do %>
+<% end %>

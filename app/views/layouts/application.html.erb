@@ -15,6 +15,7 @@
       <div class="layout">
         <!-- Header START -->
         <%= render "layouts/shared/header" %>
+
         <!-- Header END -->
 
         <!-- Side Nav START -->
@@ -23,7 +24,6 @@
 
         <!-- Page Container START -->
         <div class="page-container">
-
           <!-- Content Wrapper START -->
           <div class="main-content">
             <%= yield %>
@@ -31,11 +31,15 @@
           <!-- Content Wrapper END -->
 
           <!-- Footer START -->
-          <%= render "layouts/shared/footer" %>
+          <%#= render "layouts/shared/footer" %>
           <!-- Footer END -->
 
         </div>
         <!-- Page Container END -->
+
+        <!-- Detail task START-->
+        <%= turbo_frame_tag "task-show" do %><% end %>
+        <!-- Detail task END-->
       </div>
     </div>
   </body>

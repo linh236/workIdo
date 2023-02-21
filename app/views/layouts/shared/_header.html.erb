@@ -1,5 +1,10 @@
-<div class="header">
+<div class="header d-flex justify-content-between">
   <span class="font-size-22 m-t-10 m-l-20">
     <%= image_tag "logo.png", height: "50", alt: "Logo" %>
   </span>
+  <% if user_signed_in? %>
+  <span>
+    <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger btn-tone hover:text-white m-r-20 m-t-20" %>
+  </span>
+  <% end %>
 </div>

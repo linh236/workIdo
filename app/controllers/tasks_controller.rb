@@ -1,0 +1,54 @@
+class TasksController < ApplicationController
+  before_action :label, only: [:new, :create, :update, :show]
+  before_action :set_task, only: [:show]
+
+  def index
+  end
+  
+  def show
+    
+  end
+  def new
+    @task = Task.new
+  end
+
+  def create 
+    @task = Task.new(task_params)
+    @task.label = @label
+    @task.user = current_user
+    if @task.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def move_task
+    @task = Task.find_by_id(params[:id])
+    
+    if @task.present? && params[:label_id].present? 
+      @start_move_label = params[:start_move_label]
+      @task.reload
+      if @task.update_columns(label_id: params[:label_id].to_i)
+      else
+        p @task.errors
+      end
+    else
+
+    end
+  end
+
+  private
+
+    def task_params 
+      params.require(:task).permit(:name, :description, :level)
+    end
+
+    def label 
+      @label = Label.find(params[:label_id])
+    end
+
+    def set_task
+      @task = Task.find(params[:id])
+    end
+end

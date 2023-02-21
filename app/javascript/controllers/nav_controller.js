@@ -34,4 +34,10 @@ export default class extends Controller {
         });
     }
   }
+
+  close(e) {
+    const $this = $(e.currentTarget);
+    // $this.parent().animate({width: 'toggle'})
+    $this.parent().hide()
+  }
 }

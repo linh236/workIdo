@@ -1,0 +1,58 @@
+<%= turbo_frame_tag "task-show" do %>
+  <div class="fixed-right w-75" data-controller="nav">
+    <i class="icon anticon anticon-close-circle pointer" data-action="click->nav#close"></i>
+    <div class="d-flex align-items-start">
+      <div class="w-25 p-3 border-right full-height">
+
+        <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Informations</h5>
+          </div>
+          <div class="flow-root">
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+              <li class="py-3 sm:py-4 list-unstyled">
+                <h5>Assignee</h5>
+                <div class="d-flex align-items-center gap-2">
+                  <img class="w-15 h-15 border-radius-round"
+                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                  <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <%= @task&.assign&.full_name %>
+                  </p>
+                </div>
+              </li>
+              <li class="py-3 sm:py-4 list-unstyled">
+                <h5>Creator</h5>
+                <div class="d-flex align-items-center gap-2">
+                  <img class="w-15 h-15 border-radius-round"
+                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Neil image">
+                  <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <%= @task&.user&.full_name %>
+                  </p>
+                </div>
+              </li>
+              <li class="py-3 sm:py-4 list-unstyled d-flex align-items-center gap-2">
+                <h5 class="mb-0">Priority</h5>
+                <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
+                  <%= @task.level %>
+                </p>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="w-75 p-3">
+        <h1 class="text-center text-dark text-uppercase">
+          <%= @task.name %>
+        </h1>
+        <div class="des text-dark font-size-18 overflow-y-auto vh-80">
+          <h4>Description</h4>
+          <%= @task&.description %>
+        </div>
+        <div class="">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>

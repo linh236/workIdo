@@ -5,3 +5,10 @@ import jQuery from "jquery";
 
 // Make jQuery global
 window.$ = window.jQuery = jQuery;
+
+import autosize from 'autosize';
+import "trix"
+import "@rails/actiontext"
+
+autosize($('textarea'));
+

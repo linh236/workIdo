@@ -1,0 +1,19 @@
+<%= link_to 'Back', :back %>
+<h1>Add a new label</h1>
+
+<%= form_with model: [@current_project, @label] do |f| %>
+  <% invalid = @label.errors.include?(:name) %>
+  <div class="form-col align-item-center">
+    <div class="col-auto">
+      <%= f.text_field :name, class: "form-control #{'is-invalid' if invalid}", placeholder: "Enter name label" %>
+      <div class="invalid-feedback d-block">
+        <% @label.errors.full_messages_for(:name).each do |error_message| %>
+          <%= error_message %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-auto mt-2">
+      <%= f.submit "Save", class: "btn btn-primary btn-tone" %>
+    </div>
+  </div>
+<% end %>
