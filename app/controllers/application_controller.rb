@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_project
-    @current_project ||= Project.is_selected_project
+    @current_project ||= Project.is_selected_project rescue nil
   end
 
   def set_current_user

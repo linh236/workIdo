@@ -9,6 +9,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    Project.update_all(selected: false)
+    @project.reload
+    if @project.selected_project
+    else
+    end
   end
 
   def create

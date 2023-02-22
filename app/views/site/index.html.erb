@@ -3,5 +3,5 @@
   <%= link_to "New Label", new_project_label_path(@current_project), class: "btn btn-primary btn-tone hover:text-white m-r-20" %>
 </div>
 <div id="projects" class="projects gap-2 break-task">
-  <%= render partial: "labels/label", locals: { labels: @current_project.labels } %>
+  <%= render partial: "labels/label", locals: { labels: @current_project.labels } if @current_project.present? %>
 </div>
