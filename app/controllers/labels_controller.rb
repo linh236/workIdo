@@ -1,5 +1,6 @@
 class LabelsController < ApplicationController
   before_action :project, only: [:create, :update]
+  before_action :set_label, only: [:destroy, :update]
   def index
   end
   
@@ -17,6 +18,26 @@ class LabelsController < ApplicationController
     end
   end
 
+  def update
+    if @label.update(label_params)
+      redirect_to project_path(@current_project)
+    else
+    end
+  end
+
+  def move_label
+    @from = Label.find(params[:from])
+    @to = Label.find(params[:to])
+    from_priority = @from.priority
+    to_priority = @to.priority
+    @from.update(priority: to_priority)
+    @to.update(priority: from_priority)
+  end
+
+  def destroy
+    @label.destroy
+  end
+
   private
 
     def label_params
@@ -25,5 +46,9 @@ class LabelsController < ApplicationController
 
     def project 
       @project = Project.find(params[:project_id])
+    end
+
+    def set_label
+      @label = Label.find(params[:id])
     end
 end

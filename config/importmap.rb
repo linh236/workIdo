@@ -11,3 +11,4 @@ pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/lib/inde
 pin "autosize", to: "https://ga.jspm.io/npm:autosize@6.0.1/dist/autosize.esm.js"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+pin "flowbite", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.turbo.min.js"

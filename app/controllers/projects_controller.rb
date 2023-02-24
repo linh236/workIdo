@@ -9,9 +9,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    Project.update_all(selected: false)
-    @project.reload
-    if @project.selected_project
+    users_project = ActiveProject.where(user: current_user)
+    users_project.update_all(active: false)
+    active_project = ActiveProject.where(project: @project, user: current_user).first rescue nil
+    if active_project.update(active: true)
     else
     end
   end
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
   private
 
     def project_params
-      params.require(:project).permit(:name, :description, :selected)
+      params.require(:project).permit(:name, :description)
     end
 
     def set_project 

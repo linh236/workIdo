@@ -72,28 +72,40 @@ export default class extends RequestController {
   drop(event) {
     event.stopPropagation();
    
+    let task_id = localStorage.getItem("start_move_task_id");
     if (event.target.dataset.to === 'label') {
       event.target.style.border = "1px solid red";
-    } 
-
-    let task_id = localStorage.getItem("start_move_task_id");
-    let start_move_label = localStorage.getItem("start_move_label");
-    // let label_id = localStorage.getItem("label_id");
-    let label_id = event.target.dataset.label;
-
-    if (!label_id && !task_id) {
-      return;
-    }
-    const params = {
-      url: `/move_task/${task_id}`,
-      method: 'PUT',
-      body: {
-        label_id: label_id, 
-        start_move_label: start_move_label
+      let start_move_label = localStorage.getItem("start_move_label");
+      // let label_id = localStorage.getItem("label_id");
+      let label_id = event.target.dataset.label;
+  
+      if (!label_id && !task_id) {
+        return;
       }
+      const params = {
+        url: `/move_task/${task_id}`,
+        method: 'PUT',
+        body: {
+          label_id: label_id, 
+          start_move_label: start_move_label
+        }
+      }
+      this.sendPostOrPut(params);
+    } else {
+     if (!event.target.dataset.task) {
+      return;
+     }
+      const params = {
+        url: `/move_task_inside`,
+        method: 'PUT',
+        body: {
+          from: task_id, 
+          to: event.target.dataset.task
+        }
+      }
+      this.sendPostOrPut(params);
     }
-    this.sendPostOrPut(params);
-    
+
     event.target.classList.remove("over");
     this.resetOpacity();  
 
@@ -115,7 +127,7 @@ export default class extends RequestController {
     let label_id = event.target.dataset.label;
     let task_id = event.target.dataset.task;
     if (project_id && label_id && task_id) {
-      this.sendGet({url: `/projects/${project_id}/labels/${label_id}/tasks/${task_id}`, method: 'GET'})
+      this.sendGetorDelete({url: `/projects/${project_id}/labels/${label_id}/tasks/${task_id}`, method: 'GET'})
     }
   }
 

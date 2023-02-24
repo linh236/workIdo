@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {
   }
 
-  sendGet({url: url, method: method}) {
+  sendGetorDelete({url: url, method: method}) {
     fetch(url, {
       method: method,
       headers: {

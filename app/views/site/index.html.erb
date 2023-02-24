@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between align-items-center gap-2">
-  <h1 class="text-uppercase"><%= @current_project.name %></h1>
-  <%= link_to "New Label", new_project_label_path(@current_project), class: "btn btn-primary btn-tone hover:text-white m-r-20" %>
+  <h1 class="text-uppercase"><%= @current_project&.name %></h1>
+  <%= link_to "New Label", new_project_label_path(@current_project), class: "btn btn-primary btn-tone hover:text-white m-r-20" if @current_project.present?%>
 </div>
 <div id="projects" class="projects gap-2 break-task">
-  <%= render partial: "labels/label", locals: { labels: @current_project.labels } if @current_project.present? %>
+  <%= render partial: "labels/label", locals: { labels: @current_project&.labels.asc_priority } if @current_project.present? %>
 </div>
