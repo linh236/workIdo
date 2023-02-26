@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_action :project, only: [:invite_member, :accept_join]
-  before_action :set_member, only: [:accept_join]
+  before_action :set_member, only: [:accept_join, :remove_member]
   def index 
     @members = Member.all
   end
@@ -31,6 +31,10 @@ class MembersController < ApplicationController
     else
       render_danger(@member.errors.full_messages.join(", "))
     end
+  end
+
+  def remove_member
+
   end
 
   private 

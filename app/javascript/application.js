@@ -2,9 +2,11 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import jQuery from "jquery";
+import * as ActiveStorage from "@rails/activestorage";
 
 // Make jQuery global
 window.$ = window.jQuery = jQuery;
+ActiveStorage.start();
 
 import autosize from 'autosize';
 import "trix"
