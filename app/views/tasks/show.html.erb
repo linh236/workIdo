@@ -36,7 +36,12 @@
                   <%= @task.level %>
                 </p>
               </li>
-              
+              <li class="py-3 sm:py-4 list-unstyled d-flex align-items-center gap-2">
+                <h5 class="mb-0">Date</h5>
+                <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
+                  <%= format_datetime(@task.created_at) %>
+                </p>
+              </li>
             </ul>
           </div>
         </div>

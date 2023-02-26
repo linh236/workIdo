@@ -1,17 +1,20 @@
 class Project < ApplicationRecord
 
-  before_create :update_selected
-  after_create :selected_project, :default_label
+  after_create :active_project, :default_label
   validates :name, presence: true, uniqueness: true
 
-  has_many :labels
+  has_many :labels,  dependent: :destroy
+  has_many :members,  dependent: :destroy
+  has_many :active_projects, dependent: :destroy
+  belongs_to :assign, class_name: "User", foreign_key: "assign_id", optional: true
   
   scope :is_selected_project, -> { find_by(selected: true) }
   scope :owner, -> { where(user_id: Current.user.id)}
 
-  def selected_project
-    self.update(selected: true)
-
+  def active_project
+    active_projects = ActiveProject.where(user: Current.user)
+    active_projects.update_all(active: false)
+    ActiveProject.create(user: Current.user, project: self, active: true)
   end
   
   def default_label
@@ -22,8 +25,5 @@ class Project < ApplicationRecord
     ]
     Label.create(default_labels)
   end
-
-  def update_selected
-    Project.update_all(selected: false)
-  end
 end
+ 

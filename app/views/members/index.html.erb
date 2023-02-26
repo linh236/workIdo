@@ -1,0 +1,13 @@
+<%= link_to 'Back' , :back %>
+<h1>Invite member to <%=@current_project&.name%> project</h1>
+
+<div class="d-flex gap-2">
+  <%= form_with url: list_users_path, method: :get, data: { controller: "invite-form" , invite_form_target: "form",
+    turbo_frame: "users" }, class: "w-50" do |form| %>
+    <%= form.text_field :name, placeholder: "Search by name or email" , class: "border border-blue-500 rounded p-2 w-100" ,
+      autocomplete: "off" , data: { action: "input->invite-form#search" } %>
+  <% end %>
+  <div class="w-50">
+    <%= turbo_frame_tag "users"%>
+  </div>
+</div>

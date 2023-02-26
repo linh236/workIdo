@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "show-label-#{@from.id}" do%>
+  <%= render partial: "projects/item", locals: {label: @to} %>
+<% end %>
+
+<%= turbo_stream.replace "show-label-#{@to.id}" do%>
+  <%= render partial: "projects/item", locals: {label: @from} %>
+<% end %>

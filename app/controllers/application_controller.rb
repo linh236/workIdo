@@ -5,14 +5,47 @@ class ApplicationController < ActionController::Base
 
 
   def projects 
-    @projects ||= Project.owner.all.order(created_at: :desc) rescue nil
+    @projects ||= ActiveProject.user_project
   end
 
   def current_project
-    @current_project ||= Project.is_selected_project
+    active_project = ActiveProject.where(user: current_user, active: true).first
+    @current_project = active_project.project rescue nil
   end
 
   def set_current_user
     Current.user = current_user
+    Current.project = current_project
   end
+
+  def render_success message
+    render turbo_stream: turbo_stream.append(
+      'toast',
+      partial: 'shared/toast_success',
+      locals: {
+        message: message
+      }
+    )
+  end
+
+  def render_danger message
+    render turbo_stream: turbo_stream.append(
+      'toast',
+      partial: 'shared/toast_danger',
+      locals: {
+        message: message
+      }
+    )
+  end
+
+  def render_warning message
+    render turbo_stream: turbo_stream.append(
+      'toast',
+      partial: 'shared/toast_warning',
+      locals: {
+        message: message
+      }
+    )
+  end
+
 end

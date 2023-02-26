@@ -38,6 +38,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def move_task_inside
+    @from = Task.find(params[:from])
+    @to = Task.find(params[:to])
+    from_priority = @from.priority
+    to_priority = @to.priority
+    @from.update(priority: to_priority)
+    @to.update(priority: from_priority)
+  end
+
+
   private
 
     def task_params 

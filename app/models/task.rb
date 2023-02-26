@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  acts_as_paranoid #soft detete
   belongs_to :user
   belongs_to :label
   validates :name, presence: true, uniqueness: true
@@ -7,8 +8,6 @@ class Task < ApplicationRecord
   enum levels: [:highest, :high, :medium, :low]
   has_rich_text :description
   
-  scope :asc_priority, -> { order(priority: :asc) }
-
   after_create :update_priority
 
   private 

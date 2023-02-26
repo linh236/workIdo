@@ -1,0 +1,37 @@
+<div id="show-label-<%=label.id%>" draggable="true" data-project-target="move" data-id="<%=label.id%>" data-action="dragstart->project#dragStart dragend->project#dragEnd drop->project#drop dragenter->project#dragEnter 
+  dragleave->project#dragLeave dragover->project#dragOver"
+  class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-2">
+  <div class="flex justify-end px-4" data-id="<%=label.id%>">
+    <button id="dropdownButton" data-dropdown-toggle="dropdown-<%=label.id%>"
+      class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+      type="button">
+      <span class="sr-only">Open dropdown</span>
+      <i class="anticon anticon-check font-size-28 save d-none"></i>
+      <svg class="w-6 h-6 options" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
+        </path>
+      </svg>
+    </button>
+    <div id="dropdown-<%=label.id%>"
+      class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+      <ul class="py-2" aria-labelledby="dropdownButton">
+        <li>
+          <a data-modal-target="edit-modal-<%=label.id%>" data-modal-toggle="edit-modal-<%=label.id%>"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+        </li>
+        <li>
+          <a data-modal-target="delete-modal-<%=label.id%>" data-modal-toggle="delete-modal-<%=label.id%>"
+            class="block px-4 py-2 text-sm text-danger text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex flex-col items-center pb-4" data-id="<%=label.id%>">
+    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white text-uppercase">
+      <%= label.name %>
+    </h5>
+  </div>
+</div>
+<%= render partial: "projects/edit" , locals: { label: label }%>
+<%= render partial: "projects/delete" , locals: { label: label }%>
