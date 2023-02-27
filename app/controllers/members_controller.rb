@@ -1,6 +1,8 @@
 class MembersController < ApplicationController
-  before_action :project, only: [:invite_member, :accept_join]
-  before_action :set_member, only: [:accept_join, :remove_member]
+  before_action :project, only: [:invite_member, :accept_join, :remove_member]
+  before_action :set_member, only: [:accept_join]
+  before_action :user, only: [:remove_member]
+
   def index 
     @members = Member.all
   end
@@ -34,7 +36,19 @@ class MembersController < ApplicationController
   end
 
   def remove_member
-
+    active_project = ActiveProject.where(user: @user, project: @project).first
+    if active_project.present?
+      if active_project.active 
+        active_project.destroy
+        set_active_project = ActiveProject.where(user: @user).first
+        if set_active_project.present?
+          set_active_project.update(active: true)
+        end
+      end
+    end
+    member = Member.where(user: @user, project: @project).first
+    member.destroy
+    redirect_to project_path(@project)
   end
 
   private 
@@ -49,5 +63,9 @@ class MembersController < ApplicationController
 
     def project 
       @project = Project.find(params[:project_id])
+    end
+
+    def user 
+      @user = User.find(params[:user_id])
     end
 end

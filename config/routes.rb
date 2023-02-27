@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :members
     get "invite_member/:user_id", to: "members#invite_member", as: "invite_member"
     get "accept_join/:id", to: "members#accept_join", as: "accept_join"
-    delete "remove_member/:id", to: "members#remove_member", as: "remove_member"
+    delete "remove_member/:user_id", to: "members#remove_member", as: "remove_member"
     resources :labels do 
       resources :tasks
     end

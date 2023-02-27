@@ -5,8 +5,8 @@
       <%= link_to "Invite member" , project_members_path(@project), class: "btn btn-primary btn-tone hover:text-white m-r-20" %>
     </div>
     <% end %>
-  <div class="d-flex gap-2">
-    <div class="label-list w-25">
+  <div class="d-flex flex-column flex-sm-row gap-2">
+    <div class="label-list w-full">
       <h1 class="text-uppercase">
         <%= @project.name %>
       </h1>
@@ -14,7 +14,7 @@
         <%= render partial: "projects/item" , locals: {label: label} %>
       <% end %>
     </div>
-    <div class="member-list w-25">
+    <div class="member-list w-full">
       <h1 class="text-uppercase">
         Members
       </h1>

@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
 
   after_create :active_project, :default_label
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :deleted_at }
 
   has_many :labels,  dependent: :destroy
   has_many :members,  dependent: :destroy
