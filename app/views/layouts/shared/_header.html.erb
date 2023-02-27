@@ -1,5 +1,6 @@
-<div class="header d-flex justify-content-between">
-  <span class="font-size-22 m-t-10 m-l-20">
+<div class="header d-flex justify-content-between" data-controller="nav">
+  <span class="font-size-22 m-t-10 m-l-20 pointer flex gap-2 items-center">
+    <i class="anticon anticon-menu d-lg-none" data-action="click->nav#openMenu"></i>
     <%= image_tag "logo.png", height: "50", width: "80", alt: "Logo" %>
   </span>
   <% if user_signed_in? %>

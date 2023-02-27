@@ -9,11 +9,20 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    users_project = ActiveProject.where(user: current_user)
-    users_project.update_all(active: false)
-    active_project = ActiveProject.where(project: @project, user: current_user).first rescue nil
-    if active_project.update(active: true)
-    else
+    actived_project = ActiveProject.where(user: current_user).first
+    if actived_project.present? 
+      users_project = ActiveProject.where(user: current_user)
+      users_project.update_all(active: false)
+      active_project = ActiveProject.where(project: @project, user: current_user).first rescue nil
+      if active_project.present? && active_project.update(active: true)
+      else
+        redirect_to project_path(@current_project)
+      end
+    else 
+      if actived_project.present?
+        actived_project.update(active: true)
+      end
+      redirect_to root_path
     end
   end
 
