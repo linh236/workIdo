@@ -73,9 +73,9 @@ export default class extends RequestController {
     event.stopPropagation();
    
     let task_id = localStorage.getItem("start_move_task_id");
-    if (event.target.dataset.to === 'label') {
+    let start_move_label = localStorage.getItem("start_move_label");
+    if (event.target.dataset.to === 'label' && start_move_label !== event.target.dataset.label) {
       event.target.style.border = "1px solid red";
-      let start_move_label = localStorage.getItem("start_move_label");
       // let label_id = localStorage.getItem("label_id");
       let label_id = event.target.dataset.label;
   
@@ -108,7 +108,7 @@ export default class extends RequestController {
 
     event.target.classList.remove("over");
     this.resetOpacity();  
-
+    localStorage.clear();
   }
 
   dragEnd(event) {
