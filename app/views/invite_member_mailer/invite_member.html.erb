@@ -2,7 +2,7 @@
   <%="#{@inviter.full_name} Invited you to join #{@project.name} project."%>
 </h4>
 <div style="text-align: center">
-  <%= image_tag @user.avatar, style: "width: 70px; height: 70px; border-radius: 50px;" %>
+  <%= image_tag @user.avatar, style: "width: 70px; height: 70px; border-radius: 50px;" if @user.avatar.attached?%>
 </div>
 <div style="text-align: center; margin-top: 12px;">
   <%= link_to "Accept to join", project_accept_join_url(@project, @member), style: "padding: 12px; border: 1px solid gray; background: blue; color: white; text-decoration: none; border-radius: 20px;" %>

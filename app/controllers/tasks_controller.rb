@@ -30,6 +30,9 @@ class TasksController < ApplicationController
       @start_move_label = params[:start_move_label]
       @task.reload
       if @task.update_columns(label_id: params[:label_id].to_i)
+        activity = tracking_activity("ActivityType::MoveTask", {task_id: @task.id, from_label_id: @start_move_label.to_i, to_label_id: params[:label_id].to_i, project_id: Current.project.id})
+        user_ids = @task.project.members.pluck(:user_id)
+        tracking_notification(user_ids, activity.id) if user_ids.present?
       else
         p @task.errors
       end
@@ -41,10 +44,16 @@ class TasksController < ApplicationController
   def move_task_inside
     @from = Task.find(params[:from])
     @to = Task.find(params[:to])
+    if @from.nil? || @to.nil?
+      redirect_to root_path
+    end
     from_priority = @from.priority
     to_priority = @to.priority
     @from.update(priority: to_priority)
     @to.update(priority: from_priority)
+
+    # Tracking Move task 
+    # tracking_activity("ActivityType::MoveTaskInside", detail: {from_task_id: @from.id, to_task_id: @to.id})
   end
 
 

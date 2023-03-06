@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   belongs_to :label
   validates :name, presence: true, uniqueness: { scope: :user_id }
   belongs_to :assign, class_name: "User", foreign_key: "assign_id", optional: true
+  has_one :project, :through => :label
 
   enum levels: [:highest, :high, :medium, :low]
   has_rich_text :description
@@ -14,5 +15,6 @@ class Task < ApplicationRecord
 
     def update_priority
       self.update(priority: self.id)
+      tracking_activity(self, {task_id: self.id, text: "Create a new task #{self.name}", project_id: Current.project.id})
     end
 end

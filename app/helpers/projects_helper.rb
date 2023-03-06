@@ -1,5 +1,5 @@
 module ProjectsHelper
-  def is_manager
-    return @current_project&.user_id == current_user&.id
+  def is_manager project
+    return project&.user_id == current_user&.id
   end
 end
