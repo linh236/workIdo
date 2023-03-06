@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/list_users'
   devise_for :users
   root "site#index"
   
@@ -22,4 +21,8 @@ Rails.application.routes.draw do
   resources :users
 
   get "list_users", to: "users#list_users"
+
+  resources :activities
+
+  resources :account_notifications
 end

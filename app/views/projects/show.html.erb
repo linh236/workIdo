@@ -1,5 +1,5 @@
 <div data-controller="project">
-  <% if is_manager %>
+  <% if is_manager(@project) %>
     <div class="d-flex justify-content-end align-items-center gap-2">   
       <%= link_to "New Label" , new_project_label_path(@project), class: "btn btn-primary btn-tone hover:text-white m-r-20" %>
       <%= link_to "Invite member" , project_members_path(@project), class: "btn btn-primary btn-tone hover:text-white m-r-20" %>
@@ -19,7 +19,7 @@
         Members
       </h1>
       <% @project.members.asc_priority.each do |member| %>
-        <%= render partial: "users/user", locals: { user: member.user, is_send: false, status: member.accept }%>
+        <%= render partial: "users/user", locals: { user: member.user, is_send: false, status: member.accept, project: @project}%>
       <% end %>
     </div>
   </div>

@@ -77,3 +77,9 @@ gem 'bootstrap', '~> 4.0.0'
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "paranoia", "~> 2.6"
+
+gem "ruby-vips", "~> 2.1"
+
+gem "mini_magick", "~> 4.11"
+
+gem "pagy", "~> 6.0"

@@ -1,0 +1,18 @@
+<div class="p-2 mb-2 w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-900">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex gap-2 align-items-center">
+      <%= image_tag account_notification.user.avatar, class: "w-[70px] h-[70px] rounded-full" if account_notification.user.avatar.attached?%>
+      <div class="flex gap-2">
+        <div>
+          <h5 class="mb-0 tracking-tight text-gray-900 dark:text-white"><%= account_notification.user.full_name %></h5>
+          <p class="mb-0 font-normal text-gray-500 dark:text-gray-400"><%= time_ago_in_words(account_notification.created_at) %></p>
+        </div>
+        <div>
+          <p class="mb-0 font-normal text-gray-900 dark:text-gray-900">
+            |&nbsp;<%=account_notification.activity.object_activity_type%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
