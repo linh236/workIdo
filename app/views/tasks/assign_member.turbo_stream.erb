@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "assign-#{@task.id}" do %>
+  <%= render partial: "tasks/assign_member", locals: {assign: @task.assign } if @task.assign.present? %>
+<% end %>

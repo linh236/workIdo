@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "task-show" do %>
-  <div class="fixed-right w-85" data-controller="nav">
+  <div class="fixed-right w-85 task-detail" data-controller="nav">
     <i class="icon anticon anticon-close-circle pointer" data-action="click->nav#close"></i>
     <div class="d-flex align-items-start">
       <div class="w-25 p-3 border-right full-height">
@@ -13,18 +13,23 @@
               <li class="py-3 sm:py-4 list-unstyled">
                 <h5>Assignee</h5>
                 <div class="d-flex align-items-center gap-2">
-                  <img class="w-15 h-15 border-radius-round"
-                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image">
-                  <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
-                    <%= @task&.assign&.full_name %>
-                  </p>
+                  <%# <img class="w-15 h-15 border-radius-round"
+                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image"> %>
+                  <%= image_tag @task.assign.avatar, class: "w-[30px] h-[30px] rounded-full" if @task.assign.present? %>
+                  <%# <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white"> %>
+                    <%#= @task&.assign&.full_name %>
+                  <%# </p> %>
+                  <div class="w-full" data-controller="assign-member">
+                    <%= collection_select :task, :assign_id, @task.assign_members, :user_id ,:get_full_name, { prompt: true }, { data: {action: "change->assign-member#assignMember", task: @task.id }, class: "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
+                  </div>
                 </div>
               </li>
               <li class="py-3 sm:py-4 list-unstyled">
                 <h5>Creator</h5>
                 <div class="d-flex align-items-center gap-2">
-                  <img class="w-15 h-15 border-radius-round"
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Neil image">
+                  <%# <img class="w-15 h-15 border-radius-round"
+                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Neil image"> %>
+                  <%= image_tag @task.user.avatar, class: "w-[30px] h-[30px] rounded-full" if @task.user.present? %>
                   <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
                     <%= @task&.user&.full_name %>
                   </p>

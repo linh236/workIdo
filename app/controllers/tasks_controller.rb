@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :label, only: [:new, :create, :update, :show]
-  before_action :set_task, only: [:show]
+  before_action :set_task, only: [:show, :assign_member]
 
   def index
   end
@@ -54,6 +54,15 @@ class TasksController < ApplicationController
 
     # Tracking Move task 
     # tracking_activity("ActivityType::MoveTaskInside", detail: {from_task_id: @from.id, to_task_id: @to.id})
+  end
+
+  def assign_member
+    if @task.update(assign_id: params[:assign_id])
+      if current_user.id != params[:assign_id].to_i
+        activity = tracking_activity("ActivityType::AssignMember", {task_id: @task.id, assign_id: params[:assign_id], text: "Assign Task"})
+        tracking_notification([params[:assign_id]], activity.id)
+      end
+    end
   end
 
 

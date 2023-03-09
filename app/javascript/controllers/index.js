@@ -16,6 +16,7 @@ import NavController from "./nav_controller";
 import ProjectController from "./project_controller";
 import InviteFormController from "./invite_form_controller";
 import ToastController from "./toast_controller";
+import AssignMemberController from "./assign_member_controller";
 
 application.register("request", RequestController)
 application.register("move-task", MoveTaskController)
@@ -23,3 +24,4 @@ application.register("nav", NavController)
 application.register("project", ProjectController)
 application.register("invite-form", InviteFormController)
 application.register("toast", ToastController)
+application.register("assign-member", AssignMemberController)
