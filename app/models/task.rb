@@ -11,6 +11,10 @@ class Task < ApplicationRecord
   
   after_create :update_priority
 
+  def assign_members
+    Member.where(project_id: self.label.project_id)
+  end
+
   private 
 
     def update_priority

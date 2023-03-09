@@ -2,7 +2,7 @@ class Label < ApplicationRecord
   acts_as_paranoid #soft detete
   belongs_to :project
   has_many :tasks,  dependent: :destroy
-  has_many :assign_members, class_name: "Member", foreign_key: "project"
+  # has_many :assign_members, class_name: "Member", foreign_key: "project"
 
   validates :name, presence: true, uniqueness: true
 
