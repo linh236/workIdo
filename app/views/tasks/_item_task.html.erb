@@ -1,7 +1,5 @@
 <div id="label-<%=task.label_id%>-task-<%=task.id%>" data-controller="move-task" data-to="task" data-priority="<%= task.priority %>" data-project="<%= @current_project.id %>" data-label="<%= task.label_id %>" data-task="<%= task.id %>" data-move-task-target="move" draggable="true" data-action="dragstart->move-task#dragStart dragend->move-task#dragEnd drop->move-task#drop dragenter->move-task#dragEnter 
   dragleave->move-task#dragLeave dragover->move-task#dragOver click->move-task#detail" class="p-2 bg-white border border-gray-200 rounded-lg shadow">
-  <%#= link_to project_label_task_path(@current_project, task.label, task), data: { turbo_frame: "task-show" } do %>
-    <!-- <svg class="w-10 h-10 mb-2 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg> -->
     <h5 data-action="click->move-task#detail" data-project="<%= @current_project.id %>" data-label="<%= task.label_id %>" data-task="<%= task.id %>" class="mb-2 tracking-tight text-gray-900 dark:text-white"><%= task.name %></h5>
     <div data-action="click->move-task#detail" data-project="<%= @current_project.id %>" data-label="<%= task.label_id %>" data-task="<%= task.id %>" class="d-flex justify-between items-center">
       <%= show_level(task.level).html_safe%>
@@ -9,6 +7,4 @@
         <%= render partial: "tasks/assign_member", locals: {assign: task.assign } if task.assign.present? %>
       <% end %>
     </div>
-  <%# end %>
-  <!-- <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><%= task.description %></p> -->
 </div>

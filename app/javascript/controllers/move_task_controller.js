@@ -123,6 +123,9 @@ export default class extends RequestController {
   }
 
   detail(event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
     let project_id = event.target.dataset.project;
     let label_id = event.target.dataset.label;
     let task_id = event.target.dataset.task;

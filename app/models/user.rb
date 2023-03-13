@@ -10,7 +10,8 @@ class User < ApplicationRecord
   has_many :inviters, class_name: "Member", foreign_key: "invited_by", dependent: :destroy
   has_many :account_notifications, dependent: :destroy
   has_many :performers, class_name: "Activity", foreign_key: "perform_id", dependent: :destroy
-
+  has_many :comments, dependent: :destroy
+  
   has_one_attached :avatar
   
   after_create :default_avatar 
