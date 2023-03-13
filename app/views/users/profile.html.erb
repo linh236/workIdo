@@ -1,0 +1,39 @@
+<%= form_with model: @user do |f| %>
+  <div class="relative z-0 w-full mb-6 group d-flex justify-center">
+    <%= image_tag @user.avatar, class: "w-[100px] h-[100px] rounded-full" %>
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+    <input type="text" name="user[full_name]" id="full_name" value="<%=@user.full_name%>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+    <label for="full_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name*</label>
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+    <%= f.rich_text_area :description, class: "form-control", placeholder: "Description myself" %>
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+    <%= f.email_field :email, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", disabled: true%>
+    <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+  </div>
+  <div class="grid md:grid-cols-2 md:gap-6">
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="text" value="<%=@user.social["facebook"]%>" pattern="https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,}([-a-zA-Z0-9@:%_+.~#?&=/$]*)?" name="user[social][facebook]" id="facebook" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+      <label for="facebook" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Facebook</label>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="text" value="<%=@user.social["linkedin"]%>" pattern="https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,}([-a-zA-Z0-9@:%_+.~#?&=/$]*)?" name="user[social][linkedin]" id="linkedin" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+      <label for="linkedin" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Linkedin</label>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-2 md:gap-6">
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="tel" value="<%=@user.social["twitter"]%>" pattern="https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,}([-a-zA-Z0-9@:%_+.~#?&=/$]*)?" name="user[social][twitter]" id="twitter" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+      <label for="twitter" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Twitter</label>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="text" value="<%=@user.social["instagram"]%>" pattern="https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,}([-a-zA-Z0-9@:%_+.~#?&=/$]*)?" name="user[social][instagram]" id="instagram" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+      <label for="instagram" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Instagram</label>
+    </div>
+  </div>
+  <div class="d-flex justify-center items-center gap-2 mb-3">
+    <%= f.submit "Save", class: "rounded-lg py-2 px-4 btn-lg bg-blue-600 hover:bg-blue-800 text-white inline-block font-medium cursor-pointer"%>
+  </div>
+<% end %>

@@ -13,8 +13,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   
   has_one_attached :avatar
-  
+  has_rich_text :description
+
   after_create :default_avatar 
+  validates :full_name, presence: true
 
   def self.search word
     if word.present?

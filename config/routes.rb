@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :users
 
   get "list_users", to: "users#list_users"
-
+  get "profile/:id", to: "users#profile", as: "profile"
   resources :activities
 
   resources :account_notifications

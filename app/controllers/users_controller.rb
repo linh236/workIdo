@@ -12,8 +12,21 @@ class UsersController < ApplicationController
     )
   end
 
-  def show 
-
+  def profile 
+    @user = current_user
   end
 
+  def update
+    if current_user.update(set_user)
+      render_success("Update profile successfully")
+    else
+      render_danger(current_user.errors.full_messages.join(", "))
+    end
+  end
+
+  private 
+
+    def set_user 
+      params.require(:user).permit(:full_name, :description, social: {})
+    end
 end
