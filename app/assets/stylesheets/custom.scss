@@ -34,7 +34,8 @@ a.btn.btn-primary {
 .fixed-right {
   .icon {
     font-size: 30px;
-    left: -10px;
+    left: 0px;
+    top: 16px;
     position: absolute;
   }
 }
@@ -59,4 +60,8 @@ a.btn.btn-primary {
   grid-template-columns: repeat(8, 1fr);
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+#toast-success, #toast-warning, #toast-danger {
+  z-index: 10000;
 }

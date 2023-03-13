@@ -6,8 +6,9 @@ class TasksController < ApplicationController
   end
   
   def show
-    
+    @comment = Comment.new
   end
+  
   def new
     @task = Task.new
   end
@@ -60,7 +61,9 @@ class TasksController < ApplicationController
     if @task.update(assign_id: params[:assign_id])
       if current_user.id != params[:assign_id].to_i
         activity = tracking_activity("ActivityType::AssignMember", {task_id: @task.id, assign_id: params[:assign_id], text: "Assign Task"})
-        tracking_notification([params[:assign_id]], activity.id)
+        if params[:assign_id].present? 
+          tracking_notification([params[:assign_id]], activity.id)
+        end 
       end
     end
   end

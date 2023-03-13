@@ -8046,7 +8046,7 @@ button.bg-dark:focus {
   right: 0;
   top: 70px;
   z-index: 1030;
-  height: calc(100vh - 70px);
+  height: calc(100vh);
   background: #dee2e6;
 }
 
@@ -17758,7 +17758,8 @@ iframe {
 
 .page-container .main-content {
   padding: calc(70px + 25px) 25px 25px;
-  min-height: calc(100vh - 70px)
+  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px)
 }
 
 .page-container .main-content.full-container {

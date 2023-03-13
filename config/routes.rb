@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
-  resources :tasks
+  resources :tasks do 
+    resources :comments
+  end
   put "move_task/:id", to: "tasks#move_task"
   put "move_task_inside", to: "tasks#move_task_inside"
   post "assign_member/:id", to: "tasks#assign_member"

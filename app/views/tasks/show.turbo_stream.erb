@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "task-show" do %>
-  <div class="fixed-right w-85 task-detail" data-controller="nav">
+<%= turbo_stream.update "task-show" do %>
+  <div class="fixed-right w-85 task-detail overflow-y-auto" data-controller="nav">
     <i class="icon anticon anticon-close-circle pointer" data-action="click->nav#close"></i>
     <div class="d-flex align-items-start">
       <div class="w-25 p-3 border-right full-height">
@@ -12,7 +12,7 @@
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
               <li class="py-3 sm:py-4 list-unstyled">
                 <h5>Assignee</h5>
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2" id="assign-member-<%=@task.user_id%>">
                   <%# <img class="w-15 h-15 border-radius-round"
                     src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image"> %>
                   <%= image_tag @task.assign.avatar, class: "w-[30px] h-[30px] rounded-full" if @task.assign.present? %>
@@ -21,6 +21,9 @@
                   <%# </p> %>
                   <div class="w-full" data-controller="assign-member">
                     <%= collection_select :task, :assign_id, @task.assign_members, :user_id ,:get_full_name, { prompt: true }, { data: {action: "change->assign-member#assignMember", task: @task.id }, class: "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
+                    <% if @task.assign.present? %>
+                      <p class="pointer text-red-500 hover:text-red-700" data-task="<%= @task.id%>"data-action="click->assign-member#noneMember">None</p>
+                    <% end %>
                   </div>
                 </div>
               </li>
@@ -51,18 +54,53 @@
           </div>
         </div>
       </div>
-      <div class="w-75 p-3">
+      <div class="w-75 p-3 mb-[20px]">
         <h1 class="text-center text-dark text-uppercase">
           <%= @task.name %>
         </h1>
-        <div class="des text-dark font-size-18 overflow-y-auto vh-80">
+        <div class="des-<%=@task.id%> text-dark font-size-18 overflow-y-auto vh-80">
           <h4>Description</h4>
           <%= @task&.description %>
+          <hr>
+          <div id="comment-list" data-controller="modal-turbo">
+            <h5>Comments</h5>
+            <% @task&.comments.each do |comment| %>
+              <div id="comment-<%=comment.id%>">
+                <div class="d-flex align-items-center gap-2 justify-between">
+                  <div class="d-flex align-items-center gap-2">
+                    <%= image_tag comment.user.avatar, class: "w-[30px] h-[30px] rounded-full" if comment.user.present? %>
+                    <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
+                      <%= comment&.user&.full_name %>
+                    </p>
+                  </div>
+                  <% if comment.user == current_user %>
+                    <div class="pointer mb-0 text-sm font-medium truncate d-flex align-items-center gap-2">
+                      <p data-task="<%=@task.id%>" data-id="<%=comment.id%>" data-action="click->modal-turbo#editComment" class="text-blue-500 hover:text-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium text-sm inline-flex items-center">Edit</p>
+                      <p data-task="<%=@task.id%>" data-id="<%=comment.id%>" data-action="click->modal-turbo#deleteComment" class="text-red-500 hover:text-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium text-sm inline-flex items-center">Delete</p>
+                    </div>
+                  <% end %>
+                </div>
+                <p>
+                  <%= comment.description %>
+                </p>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div class="">
-          <input type="text" class="form-control">
+        <div class="mb-4" data-controller="modal-turbo">
+          <input type="text" class="form-control disabled pointer input-<%=@task.id%>" data-action="click->modal-turbo#open" data-id="<%=@task.id%>" placeholder= "Enter comment">
+          <div id="comment-form-<%=@task.id%>" class="comment-form-<%=@task.id%> p-2 hidden m-h-[400px] overflow-y-auto bg-white">
+            <%= form_with model: [@task, @comment] do |f| %>
+              <%= f.rich_text_area :description, class: "form-control", placeholder: "Enter comment" %>
+              <div class="d-flex justify-between items-center gap-2 mb-3">
+                <%= f.submit "Post", class: "rounded-lg py-1 px-2 btn-sm w-full bg-blue-600 hover:bg-blue-800 text-white inline-block font-medium cursor-pointer", data: {id: @task.id, action: "click->modal-turbo#open"} %>
+                <button data-id="<%=@task.id%>" data-action="click->modal-turbo#open" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center py-1 px-2 text-center mr-2">cancel</button>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <% end %>
+<% end %>
+

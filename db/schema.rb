@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_01_015136) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_074532) do
   create_table "account_notifications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_015136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["perform_id"], name: "index_activities_on_perform_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -146,6 +155,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_015136) do
   add_foreign_key "active_projects", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "tasks"
+  add_foreign_key "comments", "users"
   add_foreign_key "labels", "projects"
   add_foreign_key "members", "projects"
   add_foreign_key "members", "users"

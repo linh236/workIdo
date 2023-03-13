@@ -5,7 +5,7 @@ class Task < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user_id }
   belongs_to :assign, class_name: "User", foreign_key: "assign_id", optional: true
   has_one :project, :through => :label
-
+  has_many :comments, dependent: :destroy
   enum levels: [:highest, :high, :medium, :low]
   has_rich_text :description
   
