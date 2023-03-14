@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_rich_text :description
 
   after_create :default_avatar 
-  validates :full_name, presence: true
+  # validates :full_name, presence: true
 
   def self.search word
     if word.present?
