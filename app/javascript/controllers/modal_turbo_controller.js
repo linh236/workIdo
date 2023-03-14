@@ -41,6 +41,29 @@ export default class extends RequestController {
     this.sendGetorDelete(params)
   }
 
+  tags(event) {
+    if (event.keyCode === 50) {
+      $(".tags").show()
+    } else {
+      $(".tags").hide()
+    }
+  }
+
+  tagMember(event) {
+    if (event.preventDefault) {
+      event.preventDefault()
+    }
+
+    let full_name = event.target.dataset.full_name;
+    let $cmt = $(".comment");
+    let text = $cmt.val().replace("@", "");
+    text += `<strong>@${full_name}</strong>`;
+    $cmt.selectionEnd;
+    $cmt.val(text);
+    $(".tags").hide()
+  }
+  
+  // Function support 
   _openComment(task_id) {
     if ($(`.comment-form-${task_id}`).hasClass("hidden")) {
       $(`.comment-form-${task_id}`).removeClass("hidden");

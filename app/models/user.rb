@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def default_avatar
-    self.full_name = self.email
+    self.full_name = self.email.split("@")[0]
     self.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/avatar.png"), filename: "avatar.png")
     self.save
   end

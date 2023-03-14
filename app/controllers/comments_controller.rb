@@ -10,7 +10,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.task_id = params[:task_id].to_i
+    
     if @comment.save
+      users_tag(comment_params[:description], params[:task_id].to_i)
       # redirect_to root_path
     else
       render_danger(@comment.errors.full_messages.join(", "))
@@ -39,5 +41,15 @@ class CommentsController < ApplicationController
     
     def comment_params 
       params.require(:comment).permit(:description)
+    end
+
+    def users_tag comment_text, task_id
+      user_ids = []
+      comment_text.scan(/@\b[^@][a-z0-9]*\b/).each do |u|
+        full_name = u.gsub("@", "") 
+        user_ids << User.find_by_full_name(full_name).id
+      end
+      activity = tracking_activity("ActivityType::CommentTag", {task_id: task_id, tag_by: current_user.id, text: "Comment tag user"})
+      tracking_notification(user_ids, activity.id)
     end
 end
