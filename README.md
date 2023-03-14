@@ -1,9 +1,9 @@
 # README
 
-* Change css: 
-- rails assets:clean
-- assets:precompile
-- restart server: rails s
+* Method 1: If Js, Css not working
+- rails assets:clean && rails assets:precompile && rails s 
+* Method 2:
+- bin/dev
 * Using TailwindCss
 * ...
 # workIdo
