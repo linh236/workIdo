@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update]
+  # before_action :set_user, only: %i[show update]
   def list_users
     member_user_ids = Member.where(project: @current_project).pluck(:user_id) rescue []
     @users = User.search(params[:name]).where.not(id: member_user_ids) rescue []
@@ -17,8 +17,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(set_user)
-      render_success("Update profile successfully")
+    if current_user.update(user_params)
+      redirect_to profile_path(current_user)
+      # render_success("Update profile successfully")
     else
       render_danger(current_user.errors.full_messages.join(", "))
     end
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
 
   private 
 
-    def set_user 
-      params.require(:user).permit(:full_name, :description, social: {})
+    def user_params 
+      params.require(:user).permit(:full_name, :description, :avatar, social: {})
     end
 end
