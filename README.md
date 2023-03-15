@@ -8,7 +8,7 @@
 * Method 1: run `rails s`
  + Click to view error: [The asset "tailwind.css" is not present in the asset pipeline](https://github.com/rails/tailwindcss-rails/issues/158)
  
- => fix: rails assets:clean && rails assets:precompile && rails s
+ + fix: rails assets:clean && rails assets:precompile && rails s
  * Method 2: bin/dev ( Using TailwindCss )
 * ...
 # workIdo
