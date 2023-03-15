@@ -1,0 +1,39 @@
+
+<div class="prose flex-col max-w-none gap-2 flex w-full">
+  <div id="chatroom_container" class="flex-row flex">
+    <div class="flex-none h-[70vh] overflow-auto overflow-y-auto">
+      <p>
+        <span data-modal-target="new-room-modal" data-modal-toggle="new-room-modal" class="icon-holder text-blue-500 pointer">
+          New Room
+          <i class="anticon anticon-plus-circle font-size-17"></i>
+        </span>
+        <%= render partial: "rooms/new_modal", locals: { room: Room.new }%>
+      </p>
+      <% if @private_rooms.present? %>
+        <h4 class="d-flex justify-between pr-2">
+          Private Rooms
+        </h4>
+        <%= turbo_stream_from "rooms" %>
+        <div id="rooms">
+          <% @private_rooms&.each do |private_room|%>
+            <%= render partial: "rooms/room", locals: {room: private_room} %>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @rooms.present? %>
+        <h4 class="d-flex justify-between pr-2">
+          Public Rooms
+        </h4>
+        <%= turbo_stream_from "rooms" %>
+        <div id="rooms">
+          <%= render @rooms %>
+        </div>
+      <% end %>
+    </div>
+    <div id="room_container" class="flex-auto border w-full rounded p-8 h-[80vh] overflow-auto overflow-y-auto">
+      <%= turbo_frame_tag "room-details" do %>
+        SELECT THE ROOM
+      <% end %>
+    </div>
+  </div>
+</div>

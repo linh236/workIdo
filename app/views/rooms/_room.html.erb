@@ -1,0 +1,8 @@
+<%= link_to room_path(room), class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+  <%= turbo_stream_from "message-room-#{room.id}"%>
+  <%=room.name%>
+  (<span id="room-<%=room.id%>">
+    <%= render partial: "messages/count_message", locals: {count_mess: room.messages.map{|e| e.count_message if e.count_message }.compact.size}%>
+    <%#= debugger %>
+  </span>)
+<% end %>

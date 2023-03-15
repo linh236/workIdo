@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: %i[show update]
+  before_action :set_user, only: %i[chat]
   def list_users
     member_user_ids = Member.where(project: @current_project).pluck(:user_id) rescue []
     @users = User.search(params[:name]).where.not(id: member_user_ids) rescue []
@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def chat 
+
+  end
+
   def update
     if current_user.update(user_params)
       redirect_to profile_path(current_user)
@@ -29,5 +33,9 @@ class UsersController < ApplicationController
 
     def user_params 
       params.require(:user).permit(:full_name, :description, :avatar, social: {})
+    end
+
+    def set_user 
+      @user = User.find(params[:id])
     end
 end
