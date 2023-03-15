@@ -19,7 +19,7 @@
         Members
       </h1>
       <% @project.members.asc_priority.each do |member| %>
-        <%= render partial: "users/user", locals: { user: member.user, is_send: false, status: member.accept, project: @project}%>
+        <%= render partial: "users/show_user", locals: { user: member.user, is_send: false, status: member.accept, project: @project}%>
       <% end %>
     </div>
   </div>
