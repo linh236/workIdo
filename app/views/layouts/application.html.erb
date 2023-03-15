@@ -17,6 +17,11 @@
         <!-- Header START -->
         <%= render "layouts/shared/header" %>
         <%= turbo_frame_tag "toast" %>
+
+        <% flash.each do |type, msg| %>
+          <%= render partial: "shared/toast_#{type}", locals: { message: msg }%>
+        <% end %>
+        
         <!-- Header END -->
 
         <!-- Side Nav START -->

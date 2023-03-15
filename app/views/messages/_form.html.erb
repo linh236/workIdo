@@ -1,0 +1,10 @@
+<%= form_with model: [room, message] do |f| %>
+  <div class="form-col align-item-center">
+    <div class="col-auto mt-2">
+      <%= f.text_area :body, class: "form-control", placeholder: "Enter message" %>
+    </div>
+    <div class="col-auto mt-2 text-center">
+      <%= f.submit "Send", class: "btn btn-primary btn-tone" %>
+    </div>
+  </div>
+<% end %>

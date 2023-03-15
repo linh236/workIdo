@@ -1,0 +1,4 @@
+<div class="p-8 d-flex align-items-center gap-2 mb-2 <%= Current.user == message.user ? 'justify-content-start flex-row-reverse' : 'justify-content-start'%>">
+  <%= image_tag message.user.avatar, title: message.user.full_name, class: "m-2 w-[30px] h-[30px] rounded-full" %>
+  <%= message.body %>
+</div>

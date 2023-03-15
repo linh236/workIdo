@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_084627) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_095832) do
   create_table "account_notifications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
@@ -109,6 +109,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_084627) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "mark_read", default: []
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -118,6 +129,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_084627) do
     t.integer "user_id", null: false
     t.datetime "deleted_at"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_private", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.json "member_ids", default: []
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -161,7 +182,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_084627) do
   add_foreign_key "labels", "projects"
   add_foreign_key "members", "projects"
   add_foreign_key "members", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "rooms", "users"
   add_foreign_key "tasks", "labels"
   add_foreign_key "tasks", "users"
 end

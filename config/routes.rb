@@ -25,7 +25,16 @@ Rails.application.routes.draw do
 
   get "list_users", to: "users#list_users"
   get "profile/:id", to: "users#profile", as: "profile"
+  get "chat/:id", to: "users#chat", as: "chat"
+  
   resources :activities
 
   resources :account_notifications
+
+  resources :rooms do 
+    resources :messages
+  end
+
+  post "join_room/:id", to: "rooms#join_room", as: "join_room"
+
 end

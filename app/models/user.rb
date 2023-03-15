@@ -14,9 +14,16 @@ class User < ApplicationRecord
   
   has_one_attached :avatar
   has_rich_text :description
-
+  has_many :messages
+  has_many :rooms
+  
   after_create :default_avatar 
   # validates :full_name, presence: true
+  scope :all_except, ->(user) { where.not(id: user)}
+
+  after_create_commit do 
+    broadcast_append_to "users"
+  end
 
   def self.search word
     if word.present?
