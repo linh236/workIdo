@@ -1,3 +1,4 @@
+<%= turbo_stream_from "move-task"%>
 <% tasks.each do |task| %>
-  <%= render partial: "tasks/item_task", locals: {task: task}%>
+  <%= render partial: "tasks/item_task", locals: {task: task, project: @current_project}%>
 <% end %>

@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  include ActionView::RecordIdentifier
+
   acts_as_paranoid #soft detete
   belongs_to :user
   belongs_to :label
@@ -10,6 +12,10 @@ class Task < ApplicationRecord
   has_rich_text :description
   
   after_create :update_priority
+
+  after_update_commit do
+    broadcast_append_to("move-task", partial: "tasks/item_task", locals: { task: self, project: Current.project }, target: "label-#{self.label_id}")   
+  end
 
   def assign_members
     Member.where(project_id: self.label.project_id)
