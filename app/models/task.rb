@@ -13,6 +13,10 @@ class Task < ApplicationRecord
   
   after_create :update_priority
 
+  after_create_commit do
+    broadcast_append_to("move-task", partial: "tasks/item_task", locals: { task: self, project: Current.project }, target: "label-#{self.label_id}")   
+  end
+  
   after_update_commit do
     broadcast_append_to("move-task", partial: "tasks/item_task", locals: { task: self, project: Current.project }, target: "label-#{self.label_id}")   
   end
