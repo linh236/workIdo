@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   include ActionView::RecordIdentifier
+  acts_as_paranoid #soft detete
 
   belongs_to :user
   belongs_to :room

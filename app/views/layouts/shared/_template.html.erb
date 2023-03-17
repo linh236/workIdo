@@ -18,8 +18,12 @@
                   <p style="text-transform: uppercase; color: grey; font-weight: 600; font-size: 32px;">Work I Do</p>
                 </td>
                 <a style="position: absolute; right: 48px; top: 40px;">
-                  <img src="<%= email_image_tag('author.jpg') %>" width="50" alt="Author"
-                    style="border: 0; max-width: 100%; vertical-align: middle; border-radius: 50px;">
+                  <% if content_for(:user) %>
+                  <%= yield :user %>
+                  <% else %>
+                    <img src="<%= email_image_tag('author.jpg') %>" width="50" alt="Author"
+                      style="border: 0; max-width: 100%; vertical-align: middle; border-radius: 50px;">
+                  <% end %>
                 </a>
               </tr>
             </table>
