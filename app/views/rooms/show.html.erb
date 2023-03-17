@@ -8,6 +8,7 @@
           <i class="anticon anticon-plus-circle font-size-17"></i>
         </span>
         <%= render partial: "rooms/new_modal", locals: { room: Room.new }%>
+        <%= render partial: "rooms/invite_modal", locals: { users: @users, room: @room }%>
       </p>
       <h4 class="d-flex justify-between pr-2">
         Private Rooms
@@ -33,13 +34,21 @@
               <%= @room.name %>  
               <small class="font-size-12"><%=@room.member_ids.count%> Member(s)</small>      
             </div>
-          <div data-controller="join-room">
+          <div data-controller="join-room" class="d-flex gap-1">
             <% if @room.is_private && @room.joined %>
-              <%= link_to "Invite", "", data: {action: "click->join-room#invite", room: @room.id}, class: "btn text-decoration-none btn-primary btn-tone hover:text-white m-r-20"%>
-            <% end %>
-            <% if !@room.joined %>
-              <%= button_to "Join", join_room_path(@room), method: "post", class: "btn text-decoration-none btn-primary btn-tone hover:text-white m-r-20"%>
-            <% end %>
+              <button data-modal-target="invite-room-modal" data-modal-toggle="invite-room-modal" class="block mb-[11px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                Invite
+              </button>
+              <% end %>
+              <% if !@room.joined %>
+                <%= button_to "Join", join_room_path(@room), method: "post", class: "btn text-decoration-none btn-danger btn-tone hover:text-white m-r-20"%>
+                <% else %>
+                  <% if @room.user == current_user %>
+                    <%= button_to "Delete", leave_room_path(@room), method: "post", class: "block btn text-decoration-none btn-danger btn-tone hover:text-white m-r-20"%>
+                  <% else %>
+                    <%= button_to "Leave", leave_room_path(@room), method: "post", class: "btn text-decoration-none btn-danger btn-tone hover:text-white m-r-20"%>
+                  <% end %>
+              <% end %>
           </div>
         </h3>
         <%= turbo_stream_from dom_id(@room) %>

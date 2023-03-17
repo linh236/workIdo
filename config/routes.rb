@@ -32,9 +32,11 @@ Rails.application.routes.draw do
   resources :account_notifications
 
   resources :rooms do 
+    post "invite/:user_id", to: "rooms#invite", as: "invite"
+    get "accept_invite/:user_id", to: "rooms#accept_invite", as: "accept_invite"
     resources :messages
   end
 
   post "join_room/:id", to: "rooms#join_room", as: "join_room"
-
+  post "leave_room/:id", to: "rooms#leave_room", as: "leave_room"
 end
