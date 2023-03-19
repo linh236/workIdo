@@ -1,0 +1,10 @@
+<%= turbo_stream.append "account_notifications" do %>
+  <%= render @account_notifications %>
+<% end %>
+
+<%= turbo_stream.update "account_notifications_pagination" do %>
+  <%== pagy_nav @pagy %>
+<% end %>
+
+<%= turbo_stream.update "loading" do%>
+<% end %>

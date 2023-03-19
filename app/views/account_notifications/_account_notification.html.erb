@@ -1,4 +1,4 @@
-<div class="p-2 mb-2 w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-900">
+<div id="account-<%=account_notification.id%>" data-controller="notification" data-id="<%=account_notification.id%>" data-action="click->notification#markRead" class="p-2 mb-2 w-full <%= account_notification.mark_read ? 'bg-white hover:bg-white' : 'bg-gray-200 hover:bg-white'%> border border-gray-200 rounded-lg shadow">
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex gap-2 align-items-center">
       <%= image_tag account_notification.activity.performer.avatar, title: account_notification.activity.performer.full_name, class: "w-[70px] h-[70px] rounded-full" if account_notification.activity.performer.avatar.attached?%>

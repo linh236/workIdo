@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_095109) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_055903) do
   create_table "account_notifications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
-    t.boolean "mark_read"
+    t.json "mark_read", default: []
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_account_notifications_on_activity_id"

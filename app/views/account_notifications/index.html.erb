@@ -1,4 +1,12 @@
 <div>
   <h1 class="font-bold text-4xl">Notifications</h1>
-  <%= render @account_notifications %>
+  <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+    <div id="account_notifications">
+      <%= render @account_notifications %>
+    </div>
+    <div class="d-none" data-target="infinite-scroll.pagination" id="account_notifications_pagination">
+      <%== pagy_nav @pagy %>
+    </div>
+    <div class="d-flex justify-content-center" id="loading" data-target="infinite-scroll.loading"></div>
+  </div>
 </div>
