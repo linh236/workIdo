@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :activities
 
   resources :account_notifications
+  get "account_mark_read/:id", to: "account_notifications#mark_read"
 
   resources :rooms do 
     post "invite/:user_id", to: "rooms#invite", as: "invite"

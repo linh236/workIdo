@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "account-#{@account_notification.id}" do%>
+  <%= render partial: "account_notifications/account_notification", locals: {account_notification: @account_notification}%>
+<% end %>
+
+<%= turbo_stream.update "notification-count" do%>
+  <%= render partial: "layouts/shared/count_notification", locals: { notification_count: AccountNotification.notification_count.size }%>
+<% end %>
