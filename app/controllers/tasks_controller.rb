@@ -59,7 +59,7 @@ class TasksController < ApplicationController
   end
 
   def assign_member
-    if @task.update(assign_id: params[:assign_id])
+    if @task.update(assign_id: params[:assign_id], start_task: DateTime.now)
       if current_user.id != params[:assign_id].to_i
         activity = tracking_activity("ActivityType::AssignMember", {task_id: @task.id, assign_id: params[:assign_id], text: "Assign Task"})
         if params[:assign_id].present? 
@@ -73,7 +73,7 @@ class TasksController < ApplicationController
   private
 
     def task_params 
-      params.require(:task).permit(:name, :description, :level)
+      params.require(:task).permit(:name, :description, :level, :duration)
     end
 
     def label 
