@@ -19,6 +19,9 @@
       <%= select_tag "task[level]", options_for_select(Task.levels.map {|k, v| [k.capitalize, k]}), class: "form-control" %>
     </div>
     <div class="col-auto mt-2">
+      <%= f.number_field :duration, class: "form-control", placeholder: "Enter duration task" %>
+    </div>
+    <div class="col-auto mt-2">
       <%= f.submit "Save", class: "btn btn-primary btn-tone" %>
     </div>
   </div>

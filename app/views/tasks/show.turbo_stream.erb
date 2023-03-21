@@ -42,8 +42,12 @@
                 <h5 class="mb-0">Priority</h5>
                 <%= show_level(@task.level).html_safe%>
               </li>
+               <li class="py-3 sm:py-4 list-unstyled d-flex align-items-center gap-2 text-sm font-medium text-gray-900 truncate dark:text-white">
+                <h5 class="mb-0">Duration:</h5>
+                <%=@task&.duration%> day(s)
+              </li>
               <li class="py-3 sm:py-4 list-unstyled d-flex align-items-center gap-2">
-                <h5 class="mb-0">Date</h5>
+                <h5 class="mb-0">Date:</h5>
                 <p class="mb-0 text-sm font-medium text-gray-900 truncate dark:text-white">
                   <%= format_datetime(@task.created_at) %>
                 </p>
