@@ -4,12 +4,17 @@
 - Step 1: git clone git@github.com:linh236/workIdo.git
 - Step 2: cd workIdo
 - Step 3: rails db:migrate
-- Step 4: rails s 
-* Method 1: run `rails s`
+------------------------------------------------------------Method 1 --------------------------------------------------
+Run server: `rails s`
  + Click to view error: [The asset "tailwind.css" is not present in the asset pipeline](https://github.com/rails/tailwindcss-rails/issues/158)
- 
  + fix: rails assets:clean && rails assets:precompile && rails s
- * Method 2: bin/dev ( Using TailwindCss )
+ 
+Run redis: redis-server
+Run sidekiq: bundle exec sidekiq
+
+ ------------------------------------------------------------Method 2 --------------------------------------------------
+ 
+* Method 2: `bin/dev` ( Using TailwindCss, redis, sidekiq )
 * ...
 # workIdo
 * Dashboard
