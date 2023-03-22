@@ -4,6 +4,7 @@
 - Step 1: git clone git@github.com:linh236/workIdo.git
 - Step 2: cd workIdo
 - Step 3: rails db:migrate
+
 #------------------------------------------------------------Method 1 --------------------------------------------------
 Run server: `rails s`
  + Click to view error: [The asset "tailwind.css" is not present in the asset pipeline](https://github.com/rails/tailwindcss-rails/issues/158)
