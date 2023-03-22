@@ -4,7 +4,7 @@
 - Step 1: git clone git@github.com:linh236/workIdo.git
 - Step 2: cd workIdo
 - Step 3: rails db:migrate
-
+- Step 4: Run server
 #------------------------------------------------------------Method 1 --------------------------------------------------
 
 Run server: `rails s`
@@ -12,11 +12,14 @@ Run server: `rails s`
  + fix: rails assets:clean && rails assets:precompile && rails s
  
 Run redis: redis-server
+
 Run sidekiq: bundle exec sidekiq
 
 #------------------------------------------------------------Method 2 --------------------------------------------------
  
 * Method 2: `bin/dev` ( Using TailwindCss, redis, sidekiq )
+
+- Step 5: [SidekiqWeb](http://localhost:3000/sidekiq)
 * ...
 # workIdo
 * Dashboard
