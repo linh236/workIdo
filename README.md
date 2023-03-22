@@ -5,7 +5,8 @@
 - Step 2: cd workIdo
 - Step 3: rails db:migrate
 - Step 4: Run server
-#------------------------------------------------------------Method 1 --------------------------------------------------
+
+------------------------------------------------------------Method 1 --------------------------------------------------
 
 Run server: `rails s`
  + Click to view error: [The asset "tailwind.css" is not present in the asset pipeline](https://github.com/rails/tailwindcss-rails/issues/158)
@@ -15,7 +16,7 @@ Run redis: redis-server
 
 Run sidekiq: bundle exec sidekiq
 
-#------------------------------------------------------------Method 2 --------------------------------------------------
+------------------------------------------------------------Method 2 --------------------------------------------------
  
 * Method 2: `bin/dev` ( Using TailwindCss, redis, sidekiq )
 
