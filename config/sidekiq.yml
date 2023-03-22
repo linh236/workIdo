@@ -1,0 +1,5 @@
+:scheduler:
+  :schedule:
+    over_tim_task_job:
+      cron: '0 * * * * *'  
+      class: OverTimeTaskJob
