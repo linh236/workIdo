@@ -1,7 +1,7 @@
 <%= turbo_stream.replace "label-#{@from.label_id}-task-#{@from.id}" do%>
-  <%= render partial: "tasks/item_task", locals: {task: @to}%>
+  <%= render partial: "tasks/item_task", locals: {task: @to, project: @current_project}%>
 <% end %>
 
 <%= turbo_stream.replace "label-#{@to.label_id}-task-#{@to.id}" do%>
-  <%= render partial: "tasks/item_task", locals: {task: @from}%>
+  <%= render partial: "tasks/item_task", locals: {task: @from, project: @current_project}%>
 <% end %>
