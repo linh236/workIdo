@@ -10,7 +10,7 @@
         <% end %>
       </span>
     </div>
-    <div id="label-<%=label.id%>" class="overflow-y-auto vh-78" data-controller="move-task" data-to="label" data-label="<%= label.id %>" data-move-task-target="move" draggable="false" data-action="dragstart->move-task#dragStart dragend->move-task#dragEnd drop->move-task#drop dragenter->move-task#dragEnter 
+    <div id="label-<%=label.id%>" class="overflow-y-auto vh-78 pb-[60px]" data-controller="move-task" data-to="label" data-label="<%= label.id %>" data-move-task-target="move" draggable="false" data-action="dragstart->move-task#dragStart dragend->move-task#dragEnd drop->move-task#drop dragenter->move-task#dragEnter 
       dragleave->move-task#dragLeave dragover->move-task#dragOver">
       <%= render partial: "tasks/task",locals: { tasks: label.tasks.asc_priority } %>
     </div>
