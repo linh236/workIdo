@@ -46,14 +46,15 @@ class TasksController < ApplicationController
   def move_task_inside
     @from = Task.find(params[:from])
     @to = Task.find(params[:to])
-    if @from.nil? || @to.nil?
+    if @from.nil? || @to.nil? 
       redirect_to root_path
     end
-    from_priority = @from.priority
-    to_priority = @to.priority
-    @from.update_columns(priority: to_priority)
-    @to.update_columns(priority: from_priority)
-
+    if @from != @to
+      from_priority = @from.priority
+      to_priority = @to.priority
+      @from.update_columns(priority: to_priority)
+      @to.update_columns(priority: from_priority)
+    end
     # Tracking Move task 
     # tracking_activity("ActivityType::MoveTaskInside", detail: {from_task_id: @from.id, to_task_id: @to.id})
   end
