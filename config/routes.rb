@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   
   resources :activities
 
+  get "history", to: "activities#history", as: "history"
+
   resources :account_notifications
   get "account_mark_read/:id", to: "account_notifications#mark_read"
 
