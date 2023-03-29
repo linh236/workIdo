@@ -9,13 +9,17 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def history
+    @histories = Activity.where(perform_id: current_user.id).order(created_at: :desc)
+  end
+
   def destroy
     Activity.where(activityable: @activityable, user: current_user).delete_all
   end
 
   private 
 
-    def set_activityable
-      @activityable = params[:activityable_type].constantize.find(params[:activityable_id])
-    end
+  def set_activityable
+    @activityable = params[:activityable_type].constantize.find(params[:activityable_id])
+  end
 end

@@ -1,0 +1,7 @@
+<div id="histories">
+  <% @histories.each do |history| %>
+    <div class="p-2 mb-2 w-full bg-white-200 hover:bg-white border border-gray-200 rounded-lg shadow">
+      <%= render partial: "activities/history", locals: { history: history }  %>
+    </div>
+  <% end %>
+</div>
