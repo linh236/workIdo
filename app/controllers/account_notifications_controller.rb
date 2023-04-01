@@ -10,7 +10,7 @@ class AccountNotificationsController < ApplicationController
     else
     end
   end
-
+  
   private 
 
     def set_account_notifications

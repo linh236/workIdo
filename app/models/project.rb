@@ -8,7 +8,8 @@ class Project < ApplicationRecord
   has_many :active_projects, dependent: :destroy
   belongs_to :assign, class_name: "User", foreign_key: "assign_id", optional: true
   has_many :tasks, through: :label
-  
+  has_many :meetings, dependent: :destroy
+
   scope :is_selected_project, -> { find_by(selected: true) }
   scope :owner, -> { where(user_id: Current.user.id)}
 

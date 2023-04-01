@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_060331) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_090234) do
   create_table "account_notifications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
@@ -95,6 +95,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_060331) do
     t.integer "priority"
     t.datetime "deleted_at"
     t.index ["project_id"], name: "index_labels_on_project_id"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "level"
+    t.integer "user_id", null: false
+    t.integer "project_id", null: false
+    t.boolean "is_private", default: false
+    t.json "member_ids"
+    t.index ["project_id"], name: "index_meetings_on_project_id"
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -185,6 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_060331) do
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "labels", "projects"
+  add_foreign_key "meetings", "users"
   add_foreign_key "members", "projects"
   add_foreign_key "members", "users"
   add_foreign_key "messages", "rooms"

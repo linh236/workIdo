@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :account_notifications, dependent: :destroy
   has_many :performers, class_name: "Activity", foreign_key: "perform_id", dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+  has_many :meetings, dependent: :destroy
+
   has_one_attached :avatar
   has_rich_text :description
   has_many :messages
