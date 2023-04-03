@@ -20,6 +20,16 @@
               <span class="title">Messages</span>
               <% end %>
           </li>
+          <% if @current_project.present? %>
+            <li class="nav-item dropdown">
+              <%= link_to meetings_path do %>
+                <span class="icon-holder">
+                  <i class="anticon anticon-calendar"></i>
+                </span>
+                <span class="title">Calendar</span>
+              <% end %>
+            </li>
+          <% end %>
           <li class="nav-item dropdown pointer">
             <a class="dropdown-toggle" data-action="click->nav#toggle">
               <span class="icon-holder">

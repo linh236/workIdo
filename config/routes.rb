@@ -44,4 +44,6 @@ Rails.application.routes.draw do
 
   post "join_room/:id", to: "rooms#join_room", as: "join_room"
   post "leave_room/:id", to: "rooms#leave_room", as: "leave_room"
+
+  resources :meetings
 end

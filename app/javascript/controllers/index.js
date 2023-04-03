@@ -21,6 +21,7 @@ import ModalTurboController from "./modal_turbo_controller";
 import JoinRoomController from "./join_room_controller";
 import InfiniteScrollController from "./infinite_scroll_controller";
 import NotificationController from "./notification_controller";
+//import MeetingController from "./meeting_controller";
 
 application.register("request", RequestController)
 application.register("move-task", MoveTaskController)
@@ -33,3 +34,4 @@ application.register("modal-turbo", ModalTurboController)
 application.register("join-room", JoinRoomController)
 application.register("infinite-scroll", InfiniteScrollController)
 application.register("notification", NotificationController)
+//application.register("meeting", MeetingController)

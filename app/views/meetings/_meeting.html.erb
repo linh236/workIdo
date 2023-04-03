@@ -1,0 +1,6 @@
+<div id=<%= meeting.id %>>
+  <%= link_to meeting_path(meeting), data: {turbo_frame: "show_meeting"} do %>
+    <%= meeting.name %>
+  <% end %>
+</div>
+

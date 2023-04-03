@@ -90,3 +90,5 @@ gem "pagy", "~> 6.0"
 gem "sidekiq", "~> 7.0"
 
 gem "sidekiq-scheduler", "~> 5.0"
+
+gem "simple_calendar", "~> 2.4"

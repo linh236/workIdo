@@ -1,0 +1,58 @@
+<div data-controller="meeting">
+  <button data-modal-target="add-event" data-modal-toggle="add-event" class="btn btn-tone btn-primary">New Event</button>
+  <div id="add-event" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] md:h-full">
+    <div class="relative w-full h-full max-w-2xl md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button"
+          class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+          data-modal-hide="add-event">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="p-4">
+          <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">New Event</h3>
+          <%= form_with model: Meeting.new  do |f| %>
+            <div class="form-col align-item-center">
+              <div class="col-auto mt-2">
+                <%= f.text_field :name, class: "form-control", placeholder: "Enter name" %>
+              </div>
+              <div class="col-auto mt-2">
+                <%= f.rich_text_area :description, class: "form-control", placeholder: "Enter description" %>
+              </div>
+              <div class="col-auto mt-2">
+                <%= f.datetime_local_field :start_time, class: "form-control", placeholder: "Enter start time"%>
+              </div>
+              <div class="col-auto mt-2">
+                <%= f.datetime_local_field :end_time, class: "form-control", placeholder: "Enter end time"%>
+              </div>
+              <div class="col-auto mt-2">
+                <%= select_tag "meeting[level]", options_for_select(Meeting.levels.map {|k, v| [k.capitalize, k]}), class: "form-control", placeholder: "Enter level"%>
+              </div>
+              <div class="col-auto mt-2">
+                <%= select_tag "meeting[share_with]", options_for_select((Meeting.share_with).map {|k,v| [k.name, k.id]}), class: "form-control" %>
+              </div>
+              <div class="col-auto mt-2 d-flex justify-content-center2 d-flex justify-content-center">
+                <%= f.submit "Create", class: "btn btn-primary btn-tone" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%#= turbo_frame_tag "calendar" do %>
+    <%= month_calendar(events: @meetings) do |date, meetings| %>
+      <%= date.day %>
+      <%= render meetings%>
+    <% end %>
+  <%# end %>
+  
+  <%= turbo_frame_tag "show_meeting"%>
+</div>

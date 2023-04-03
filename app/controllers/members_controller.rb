@@ -29,6 +29,7 @@ class MembersController < ApplicationController
     if @project.present? && @member.present?
       @member.update(accept: true)
       ActiveProject.create(project: @project, user: current_user, active: false)
+      add_or_remove_calendar("add", @project, current_user)
       redirect_to root_path
     else
       render_danger(@member.errors.full_messages.join(", "))
@@ -41,6 +42,7 @@ class MembersController < ApplicationController
       if active_project.active 
         active_project.destroy
         set_active_project = ActiveProject.where(user: @user).first
+        add_or_remove_calendar("remove", @project, @user)
         if set_active_project.present?
           set_active_project.update(active: true)
         end
@@ -68,4 +70,17 @@ class MembersController < ApplicationController
     def user 
       @user = User.find(params[:user_id])
     end
+
+    def add_or_remove_calendar type, project, user
+      meetings = Meeting.where(project_id: project.id, is_private: false)
+      meetings.each do |meeting|
+        if type == "add"
+          meeting.member_ids << user.id
+        else
+          meeting.member_ids.delete(user.id)
+        end
+        meeting.update(member_ids: meeting.member_ids)
+      end
+    end
+
 end
