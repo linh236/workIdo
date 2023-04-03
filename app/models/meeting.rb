@@ -3,7 +3,7 @@ class Meeting < ApplicationRecord
   enum levels: [:highest, :high, :medium, :low]
 
   belongs_to :user
-  belongs_to :project
+  belongs_to :project, optional: true
 
   def tags
     if self.member_ids.present? && self.member_ids.include?(Current.user.id)
@@ -16,7 +16,7 @@ class Meeting < ApplicationRecord
   def self.share_with
     share_with = []
     share_with << Project.new(id: 0, name: "Only me")
-    share_with << ActiveProject.where(user: Current.user, active: true).first.project
+    share_with << ActiveProject.where(user: Current.user, active: true).first.project rescue nil
     share_with
   end
 end

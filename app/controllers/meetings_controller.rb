@@ -13,8 +13,9 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
     @meeting.user = current_user
     @meeting.project = @current_project
-    @meeting.member_ids = Member.where(id: params[:meeting][:share_with]).pluck(:user_id)
+    @meeting.member_ids = Member.where(project_id: params[:meeting][:share_with]).pluck(:user_id)
     @meeting.member_ids << current_user.id
+    @meeting.is_private = true if params[:meeting][:share_with] == "0"
 
     if @meeting.save
       redirect_to meetings_path, notice: "Create Event successfully"
