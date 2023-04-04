@@ -23,6 +23,7 @@ Run sidekiq: bundle exec sidekiq
 - Step 5: [SidekiqWeb](http://localhost:3000/sidekiq)
 * ...
 # workIdo
+* New Logo: ![logo](https://user-images.githubusercontent.com/40066172/229825020-9cacf5a8-1c36-46a1-ba65-189008a099a1.png)
 * Dashboard
 ![image](https://user-images.githubusercontent.com/40066172/220827464-84e33ad4-15a3-4eba-839b-f90e6198aa23.png)
 * Task detail ( Assign member, Comment task)
