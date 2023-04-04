@@ -46,6 +46,8 @@ class MembersController < ApplicationController
         if set_active_project.present?
           set_active_project.update(active: true)
         end
+      else
+        active_project.destroy
       end
     end
     member = Member.where(user: @user, project: @project).first
