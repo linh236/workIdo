@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -87,8 +87,10 @@ gem "mini_magick", "~> 4.11"
 
 gem "pagy", "~> 6.0"
 
-gem "sidekiq", "~> 7.0"
+gem "sidekiq", "<7.0"
 
 gem "sidekiq-scheduler", "~> 5.0"
 
 gem "simple_calendar", "~> 2.4"
+
+gem "pg", "~> 1.4"
